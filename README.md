@@ -1,1 +1,1 @@
-# PhD Term 2 
+# PhD Journey : Term 2 - SUTD
