@@ -8,7 +8,7 @@ Endterm :
 
 ---
 
-## Advanced Algorithms : 
+## Applied Mathematics for Engineering : 
 Topics:--
 Midterm : 
 
