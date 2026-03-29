@@ -1,0 +1,1309 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{listings}
+\lstset{
+    breaklines=true,
+    breakatwhitespace=true
+}
+\setlist[enumerate]{itemsep=.8em}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{graphicx}   
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{mathtools}
+\geometry{bottom=25mm,top=15mm, left=15mm, right=15mm}
+
+\title{\Large 99.500 : Applied Mathematics for Engineering \\ Midterm Project \\ \
+\textbf{The dynamics of quantum scattering \& confinement \\ in 1D \& 3D geometries for time-independent potentials}}
+\ignorespacesafterend
+\author{Ronit Dutta}
+\ignorespacesafterend
+\date{}
+\ignorespacesafterend
+
+\begin{document}
+\maketitle
+\ignorespacesafterend
+\begin{enumerate}
+\item \textbf{\large One-dimensional scattering from a pothole and a bump potential}
+
+The scattering problem is governed by the nondimensionalized time-independent Schrödinger equation
+\[
+\frac{d^2 \psi(x)}{dx^2} + \left[k^2 - U(x)\right]\psi(x) = 0,
+\]
+where \(U(x) = \frac{2m}{\hbar^2}V(x)\) and \(k^2 = \frac{2mE}{\hbar^2}\).
+
+For symmetric potentials, the solutions may be decomposed into even and odd parity sectors, each of which evolves independently under the dynamics.
+A particle of mass \(m\) is scattered in one dimension by symmetric potentials. We study the problem in the parity basis, where even \((+)\) and odd \((-)\) parity incoming $(\mathcal{I})$ and outgoing $(\mathcal{O})$ plane waves/ free particle are defined by
+\[
+\mathcal{I}_+(k;x)=e^{-ik|x|}, \qquad \mathcal{I}_-(k;x)=\operatorname{sign}(x)e^{-ik|x|},
+\]
+\[
+\mathcal{O}_+(k;x)=e^{+ik|x|}, \qquad \mathcal{O}_-(k;x)=-\operatorname{sign}(x)e^{+ik|x|}.
+\]
+Therefore the full wavefunction for even states $(\psi_+)$ and odd states $(\psi_-)$ can be written down as:
+\[
+\psi_+(k;x)=\mathcal{I}_+(k;x)+S_{++}(k)\mathcal{O}_+(k;x),
+\]
+\[
+\psi_-(k;x)=\mathcal{I}_-(k;x)+S_{--}(k)\mathcal{O}_-(k;x),
+\]
+where \(S_{++}\) and \(S_{--}\) are the diagonal elements of the \(S\)-matrix in the parity basis. 
+
+The original S matrix is basically the ratio of transmission (absorption) and reflection amplitudes of the incident wave which is unitary/ inner product preserving in the standard scattering setup.
+
+If we now consider symmetric potentials on the x-axis (for "generalization" and "asymmetry" one can always shift the origin), we can suitably use the parity basis to simplify calculations: \[
+\psi_+ = \psi(x) + \psi(-x) \qquad \text{[even state]}
+\] 
+\[
+\psi_- = \psi(x) - \psi(-x) \qquad \text{[odd states]}
+\]. 
+
+The parity operator $\mathcal{P}$ is commutative with the Hamiltonian $\mathcal{H}$ as $[\mathcal{P},\mathcal{H}] = 0$ which means it can have simultanous energy eigenstates. The action of the parity operator looks like 
+
+\[
+\mathcal{P} \psi(x) = \lambda \psi(-x) \Rightarrow \mathcal{P}^2 \psi(x) = \lambda^2 \psi(x)
+\] 
+\[ 
+\Rightarrow\lambda^2 = 1 \Rightarrow \lambda = \pm 1
+\]
+
+This proves the existence of odd ($\psi_-$) and even($\psi_+$) states. The parity operator/ function thus can be formally written down as \[
+\mathcal{M} =
+\begin{pmatrix}
+1 & 1 \\
+-1 & 1
+\end{pmatrix} \Leftrightarrow \begin{pmatrix}
+\text{even channel} \\
+\text{odd channel}
+\end{pmatrix},
+\] and changing the basis for our matrix into the parity basis ($S_p = \mathcal{M}^{-1}S\mathcal{M}$) we get a perfect diagonalized form.
+\[
+S_p =
+\begin{pmatrix}
+S_{++} & 0 \\
+0 & S_{--}
+\end{pmatrix},
+\]
+where \(S_{++}\) corresponds to the even-parity channel and \(S_{--}\) corresponds to the odd-parity channel. The explicit values of \(S_{++}\) and \(S_{--}\) are determined by the specific form of the potential under consideration.
+
+For countinuous potentials, the boundary condition imposed at interfaces is that the logarithmic derivative (Robin boundary condition) is continuous,
+\[
+\frac{\psi'}{\psi}\Big|_{\text{boundary}^-} = \frac{\psi'}{\psi}\Big|_{\text{boundary}^+},
+\]
+which encodes the continuity of both the wavefunction and its first derivative.
+
+\begin{enumerate}[label=(\alph*)]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Pothole.png}
+    \caption{Finite symmetric square well}
+    \label{fig:pothole}
+\end{figure}
+
+\item \textbf{Finite Symmetric square well: the pothole potential}
+Consider first the symmetric square well potential
+\[
+V(x)=
+\begin{cases}
+-V_0, & |x|<a/2,\\[4pt]
+0, & |x|>a/2,
+\end{cases}
+\qquad \text{with } V_0>0.
+\]
+Write down the general form of the even- and odd-parity solutions inside the well and outside the well, and define
+\[
+q^2=k^2+U_0, \qquad U_0=\frac{2mV_0}{\hbar^2}.
+\]
+
+\item \textbf{Matching condition and parity \(S\)-matrix}
+
+By imposing the boundary condition that \(\psi'/\psi\) is continuous at \(x=a/2\), show that
+\[
+S_{++}
+=
+-e^{-ika}\,
+\frac{q\tan(qa/2)-ik}{q\tan(qa/2)+ik},
+\qquad
+S_{--}
+=
+e^{-ika}\,
+\frac{q+ik\tan(qa/2)}{q-ik\tan(qa/2)}.
+\]
+
+\item \textbf{Bound-state interpretation}
+
+Interpret the complex poles and zeros of \(S_{++}\) and \(S_{--}\) in terms of bound states. In particular, explain what locations of the poles in the complex \(k\)-plane correspond to physical bound states, and how the even and odd parity sectors differ.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\linewidth]{double-delta.jpeg}
+    \caption{Double-$\delta$ well potential for a=1}
+    \label{fig:double-delta}
+\end{figure}
+
+\item \textbf{Symmetric double-delta "barrier"}
+Carry out a similar analysis as before, but this time for the potential
+\[
+V(x)= V_{\delta^+\delta^+} = V_0\big[\delta(x-1)+\delta(x+1)\big],
+\qquad \text{with } V_0>0.
+\]
+Determine the corresponding parity-basis scattering amplitudes \(S_{++}(k)\) and \(S_{--}(k)\), using appropriate matching conditions at \(x=\pm1\).
+
+\item \textbf{Plotting}
+\begin{itemize}
+    \item[(1)] Use the complex poles of the \textbf{pothole potential} and find the solution for the transcendental equation that comes as a result of the constraint. Set the value of \boxed{$U_0 = 1$}. Plot the solutions (both odd and even) of the equation using the poles for :
+\begin{enumerate}
+    \item a = 1
+    \item a = 5
+    \item a = 10
+\end{enumerate}
+    \item[(2)] Plot the bound states for the \textbf{double-$\delta$ "well" potential} (part (d) but with $V_0  < 0$ as shown in the image \ref{fig:double-delta}) and explain how positive bound states can possibly exist for a potential with $\lim\limits_{x \to \infty} V(x)=0$. Remember to take the limit $V_0 \rightarrow\infty$
+\end{itemize}
+\end{enumerate}
+
+\vspace{4pt}
+
+\item \textbf{\large Three-dimensional scattering from hard spheres and spherical wells}
+
+For three-dimensional problems with spherical symmetry, the governing equation is the nondimensionalized Helmholtz equation
+\[
+\nabla^2 \psi(\mathbf r) + k^2 \psi(\mathbf r) = U(r)\,\psi(\mathbf r),
+\]
+where \(U(r)=\frac{2m}{\hbar^2}V(r)\) and \(k^2=\frac{2mE}{\hbar^2}\).
+
+Exploiting spherical symmetry, the solution is separated as
+\[
+\psi(\mathbf r)=R_l(r)\,Y_l^m(\theta,\phi),
+\]
+where \(Y_l^m(\theta,\phi)\) are spherical harmonics and form an orthonormal basis on the sphere.
+
+The radial function is written in reduced form \(u_l(r)=rR_l(r)\), which satisfies the second-order ordinary differential equation
+\[
+\frac{d^2 u_l}{dr^2} + \left[k^2 - \frac{l(l+1)}{r^2} - U(r)\right]u_l = 0.
+\]
+
+In regions where \(U(r)=0\), the equation reduces to
+\[
+\frac{d^2 u_l}{dr^2} + \left[k^2 - \frac{l(l+1)}{r^2}\right]u_l = 0,
+\]
+whose general solution is expressed in terms of spherical Bessel and Neumann functions,
+\[
+R_l(r)=A\,j_l(kr)+B\,n_l(kr).
+\]
+
+The asymptotic forms of these functions are
+\[
+j_l(kr)\sim \frac{1}{kr}\sin\!\left(kr-\frac{l\pi}{2}\right), \qquad
+n_l(kr)\sim -\frac{1}{kr}\cos\!\left(kr-\frac{l\pi}{2}\right),
+\]
+which combine into the phase-shifted form
+\[
+R_l(r)\sim \frac{1}{kr}\sin\!\left(kr-\frac{l\pi}{2}+\delta_l\right).
+\]
+
+At boundaries \(r=a\), continuity of the solution and its derivative is imposed,
+\[
+R_l(a^-)=R_l(a^+), \qquad R_l'(a^-)=R_l'(a^+),
+\]
+which is equivalently expressed as continuity of the logarithmic derivative,
+\[
+\frac{R_l'}{R_l}\Big|_{a^-}=\frac{R_l'}{R_l}\Big|_{a^+}.
+\]
+
+For impenetrable regions (e.g. hard-sphere type constraints), the boundary condition reduces to
+\[
+R_l(a)=0.
+\]
+
+For potentials where $V \neq 0$ we can use the scaling constant $\gamma = \dfrac{2m}{\hbar^2}V$. The current scope ONLY includes constant values of V. If $V(r)$ is a continuous function then the scattering problem becomes unnecessarily complicated.
+
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{Hard-sphere radial wavefunction}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\linewidth]{hard-sphere.png}
+    \begin{center}
+        \caption{Schematic for the hard sphere with classical solid projectile with $\text  {radius }=\alpha$, $\text{imapct parameter }=b$ and $\text{scattering angle }=\theta$}
+    \end{center}
+    \label{fig:hard-sphere}
+\end{figure}
+
+A free particle scatters off a hard sphere of radius \(a\) with the potential given by :
+\[
+V(r)=
+\begin{cases}
+\infty, & r<a,\\[4pt]
+0, & r\ge a.
+\end{cases}
+\]
+
+\begin{itemize}
+\item[(i)] Find the solution for the radial wavefunction $R(r)$ in the asymptotic limit. 
+
+\item[(ii)] For the hard sphere potential show that the phase shifts \(\delta_l\) obey
+\[
+\tan\delta_l=\frac{j_l(ka)}{n_l(ka)}.
+\]
+
+What is the exact value of phase shift for $l=0$ (s-wave)? Is this the largest $\delta$? Why?
+\end{itemize}
+\item \textbf{Attractive spherical well}
+
+A free particle scatters off spherical attractive potential $V_0$. You can take $V_0 = \dfrac{\hbar^2\gamma^2}{2m}$ for some real constant $\gamma$ for ease of calculation.
+\[
+V(r)=
+\begin{cases}
+-\hbar^2\gamma^2/2m, & r<a,\\[4pt]
+0, & r\ge a.
+\end{cases}
+\]
+Show that the phase shifts obey
+\[
+\tan\delta_l=
+\frac{q\,j_l(ka)\,j_l'(qa)-k\,j_l'(ka)\,j_l(qa)}
+{q\,n_l(ka)\,j_l'(qa)-k\,n_l'(ka)\,j_l(qa)},
+\]
+where
+\[
+q^2=k^2+\gamma^2.
+\]
+Hence show that, as \(k\to0\),
+\[
+\delta_l\sim (ka)^{2l+1}.
+\]
+
+\item \textbf{Repulsive spherical potential and scattering length}
+
+Consider a particle of essentially zero energy scattering off a repulsive spherical potential
+\[
+V(r)=
+\begin{cases}
++\hbar^2\gamma^2/2m, & r<a,\\[4pt]
+0, & r\ge a.
+\end{cases}
+\]
+By considering the \(s\)-wave wavefunction \(r\psi(r)\) for \(r\ge a\), show that the scattering length is positive.
+
+\item \textbf{Attractive well asymptotics \& it's dependency on binding strength $\gamma$}
+
+Consider now the attractive potential from part (b). Show that for a sufficiently small \(a\), the scattering length is negative. Explain the exact situation and value of $\gamma$ when the scattering length becomes divergent and the associated quantization condition for the same.
+
+\item \textbf{Plotting}
+
+\begin{enumerate}
+
+\item For a hard sphere of radius \(a\), we know the form of phase shifts from part (b). Using \texttt{matplotlib}, plot \(\delta_\ell\) as a function of \(ka\) for
+\(
+\ell=0,1,2,3
+\)
+over the range
+\[
+0.1 \le ka \le 10.
+\]
+
+Comment briefly on:
+\begin{itemize}
+\item[a)] The low-energy behavior of the different partial waves,
+\item[b)] Why the \(s\)-wave dominates for small \(ka\),
+\item[c)]
+ How the higher-\(\ell\) channels become relevant as \(ka\) increases.
+\end{itemize}
+
+\item For the attractive spherical well, the \(s\)-wave scattering length is
+\[
+\dfrac{a_s}{a}=1-\frac{\tan(\gamma a)}{\gamma a}.
+\]
+
+Using \texttt{matplotlib}, plot
+\(
+\frac{a_s}{a}
+\)
+as a function of \(\gamma a\) over a range such as
+\(
+0<\gamma a<3\pi.
+\)
+
+Your plot should clearly show the sign changes and divergences of \(a_s\). Comment briefly on the relation between these divergences and the appearance of new bound states.
+
+\item Repulsive spherical well: scattering length and comparison with hard-sphere behavior
+
+For the repulsive spherical well, the \(s\)-wave scattering length is
+\[
+\dfrac{a_s}{a}=1-\frac{\tanh(|\gamma|a)}{|\gamma| a}.
+\]
+
+Plot
+\(
+\dfrac{a_s}{a}
+\)
+as a function of \(|\gamma|a\) for \(|\gamma|a \in (0,10).\) Comment on:
+\begin{itemize}
+\item[a)] Why \(a_s\) remains finite and positive,
+\item[b)] How the result approaches the hard-sphere limit as the repulsion becomes strong.
+\end{itemize}
+
+\end{enumerate}
+
+\end{enumerate}
+\end{enumerate}
+
+\begin{center}\centering\rule{\linewidth}{0.4pt}\end{center}
+\vspace{-10pt}
+\textbf{\Large \begin{center}Solutions\end{center}}
+\vspace{-10pt}
+\begin{center}\rule{\linewidth}{0.4pt}\end{center}
+
+
+\textbf{\large Question 1}
+\begin{enumerate}[label=(\alph*)]
+
+\item For the symmetric square well the nondimensionalized Schrödinger equation is
+\[
+\psi''(x)+\bigl(k^2-U(x)\bigr)\psi(x)=0,
+\qquad
+U(x)=\frac{2m}{\hbar^2}V(x),
+\]
+with
+\[
+k^2=\frac{2mE}{\hbar^2},
+\qquad
+U_0=\frac{2mV_0}{\hbar^2},
+\qquad
+q^2=k^2+U_0.
+\]
+
+Since the potential is symmetric, the solution separates into even and odd parity since we are working with the parity basis of the S-matrix.
+
+For the even sector, the asymptotic parity-basis solution outside the well is
+\[
+\psi_+(k;x)=I_+(k;x)+S_{++}(k)\,O_+(k;x),
+\]
+with
+\[
+I_+(k;x)=e^{-ik|x|},
+\qquad
+O_+(k;x)=e^{ik|x|}.
+\]
+Hence, for \(x>a/2\),
+\[
+\psi_+(x)=e^{-ikx}+S_{++}e^{ikx}.
+\]
+Inside the well, even parity requires
+\[
+\psi_+(x)=A\bigl(e^{iqx}+e^{-iqx}\bigr)=2A\cos(qx),
+\qquad |x|<a/2.
+\]
+
+For the odd sector, the asymptotic parity-basis solution outside the well is
+\[
+\psi_-(k;x)=I_-(k;x)+S_{--}(k)\,O_-(k;x),
+\]
+with
+\[
+I_-(k;x)=\operatorname{sign}(x)e^{-ik|x|},
+\qquad
+O_-(k;x)=-\operatorname{sign}(x)e^{ik|x|}.
+\]
+Hence, for \(x>a/2\),
+\[
+\psi_-(x)=e^{-ikx}-S_{--}e^{ikx}.
+\]
+Inside the well, odd parity requires
+\[
+\psi_-(x)=B\bigl(e^{iqx}-e^{-iqx}\bigr)=2iB\sin(qx),
+\qquad |x|<a/2.
+\]
+
+Thus the required even- and odd-parity solutions are
+\[
+\psi_+(x)=
+\begin{cases}
+e^{-ik|x|}+S_{++}e^{ik|x|}, & |x|>a/2,\\[4pt]
+A\bigl(e^{iqx}+e^{-iqx}\bigr), & |x|<a/2,
+\end{cases}
+\]
+\[
+\psi_-(x)=
+\begin{cases}
+\operatorname{sign}(x)e^{-ik|x|}-S_{--}\operatorname{sign}(x)e^{ik|x|}, & |x|>a/2,\\[4pt]
+B\bigl(e^{iqx}-e^{-iqx}\bigr), & |x|<a/2.
+\end{cases}
+\]
+
+\item To determine \(S_{++}\) and \(S_{--}\), it is sufficient to impose continuity of the logarithmic derivative \(\psi'/\psi\) at \(x=a/2\).
+
+For the even state, outside the well (\(x>a/2\)),
+\[
+\psi_+(x)=e^{-ikx}+S_{++}e^{ikx},
+\qquad
+\psi_+'(x)=-ik\,e^{-ikx}+ik\,S_{++}e^{ikx}.
+\]
+Hence
+\[
+\frac{\psi_+'}{\psi_+}\Big|_{x=a/2}
+=
+\frac{-ik\,e^{-ika/2}+ik\,S_{++}e^{ika/2}}
+     {e^{-ika/2}+S_{++}e^{ika/2}}.
+\]
+Inside the well,
+\[
+\psi_+(x)=A\bigl(e^{iqx}+e^{-iqx}\bigr),
+\qquad
+\psi_+'(x)=iqA\bigl(e^{iqx}-e^{-iqx}\bigr),
+\]
+so that
+\[
+\frac{\psi_+'}{\psi_+}\Big|_{x=a/2}
+=
+\frac{iq\bigl(e^{iqa/2}-e^{-iqa/2}\bigr)}
+     {e^{iqa/2}+e^{-iqa/2}}
+=
+-q\tan\!\left(\frac{qa}{2}\right).
+\]
+Equating the two logarithmic derivatives gives
+\[
+\frac{-ik\,e^{-ika/2}+ik\,S_{++}e^{ika/2}}
+     {e^{-ika/2}+S_{++}e^{ika/2}}
+=
+-q\tan\!\left(\frac{qa}{2}\right).
+\]
+Solving for \(S_{++}\),
+\[
+ik\,S_{++}e^{ika/2}+q\tan\!\left(\frac{qa}{2}\right)S_{++}e^{ika/2}
+=
+ik\,e^{-ika/2}-q\tan\!\left(\frac{qa}{2}\right)e^{-ika/2},
+\]
+and therefore
+\[
+S_{++}
+=
+e^{-ika}\,
+\frac{ik-q\tan(qa/2)}{ik+q\tan(qa/2)}
+=
+-\,e^{-ika}\,
+\frac{q\tan(qa/2)-ik}{q\tan(qa/2)+ik}.
+\]
+
+Hence
+\[
+\boxed{
+S_{++}
+=
+-\,e^{-ika}\,
+\frac{q\tan(qa/2)-ik}{q\tan(qa/2)+ik}
+}.
+\]
+
+For the odd state, outside the well (\(x>a/2\)),
+\[
+\psi_-(x)=e^{-ikx}-S_{--}e^{ikx},
+\qquad
+\psi_-'(x)=-ik\,e^{-ikx}-ik\,S_{--}e^{ikx}.
+\]
+Hence
+\[
+\frac{\psi_-'}{\psi_-}\Big|_{x=a/2}
+=
+\frac{-ik\,e^{-ika/2}-ik\,S_{--}e^{ika/2}}
+     {e^{-ika/2}-S_{--}e^{ika/2}}.
+\]
+Inside the well,
+\[
+\psi_-(x)=B\bigl(e^{iqx}-e^{-iqx}\bigr),
+\qquad
+\psi_-'(x)=iqB\bigl(e^{iqx}+e^{-iqx}\bigr),
+\]
+so that
+\[
+\frac{\psi_-'}{\psi_-}\Big|_{x=a/2}
+=
+\frac{iq\bigl(e^{iqa/2}+e^{-iqa/2}\bigr)}
+     {e^{iqa/2}-e^{-iqa/2}}
+=
+q\cot\!\left(\frac{qa}{2}\right)
+=
+\frac{q}{\tan(qa/2)}.
+\]
+Equating logarithmic derivatives,
+\[
+\frac{-ik\,e^{-ika/2}-ik\,S_{--}e^{ika/2}}
+     {e^{-ika/2}-S_{--}e^{ika/2}}
+=
+\frac{q}{\tan(qa/2)}.
+\]
+Solving for \(S_{--}\),
+\[
+-ik\,S_{--}e^{ika/2}+\frac{q}{\tan(qa/2)}\,S_{--}e^{ika/2}
+=
+ik\,e^{-ika/2}+\frac{q}{\tan(qa/2)}\,e^{-ika/2},
+\]
+which gives
+\[
+S_{--}
+=
+e^{-ika}\,
+\frac{q+ik\tan(qa/2)}{q-ik\tan(qa/2)}.
+\]
+
+Hence
+\[
+\boxed{
+S_{--}
+=
+e^{-ika}\,
+\frac{q+ik\tan(qa/2)}{q-ik\tan(qa/2)}
+}.
+\]
+
+\item Bound states correspond to normalizable solutions, so outside the well the wavefunction must decay exponentially as \(|x|\to\infty\). This occurs when the momentum is continued to the positive imaginary axis,
+\[
+k=i\lambda,
+\qquad
+\lambda>0,
+\]
+for which the asymptotic factors become \(e^{-\lambda|x|}\). Thus physical bound states correspond to poles of \(S_{++}\) or \(S_{--}\) on the positive imaginary \(k\)-axis.
+
+For the even sector, poles arise when the denominator of \(S_{++}\) vanishes:
+\[
+q\tan\!\left(\frac{qa}{2}\right)+ik=0.
+\]
+Now we set \(k=i\lambda\) gives because, the complexification of the wavevector basically gives us the bound state solution since we calculated for standing waves in the interaction region, earlier solution was for the classically allowed "roadbump" potential. \footnote{Setting $k=i\lambda$ basically means that instead of \(q = \sqrt{k^2 - U}\) we have \(\lambda = \sqrt{U - k^2} = ik\).}
+\[
+q\tan\!\left(\frac{qa}{2}\right)-\lambda=0,
+\]
+hence the even bound-state condition is
+\[
+\boxed{
+\lambda=q\tan\!\left(\frac{qa}{2}\right)
+},
+\qquad\boxed{
+q^2+\lambda^2=U_0}.
+\]
+The relation \(q^2+\lambda^2=U_0\) follows from
+\[
+q^2=k^2+U_0=-\lambda^2+U_0.
+\]
+
+For the odd sector, poles arise when the denominator of \(S_{--}\) vanishes:
+\[
+q-ik\tan\!\left(\frac{qa}{2}\right)=0.
+\]
+Setting \(k=i\lambda\) gives
+\[
+q+\lambda\tan\!\left(\frac{qa}{2}\right)=0,
+\]
+or equivalently
+\[
+\boxed{
+q=-\lambda\tan\!\left(\frac{qa}{2}\right)
+},
+\qquad
+\boxed{q^2+\lambda^2=U_0}.
+\]
+This may also be written as
+\[
+\boxed{
+\lambda=-q\cot\!\left(\frac{qa}{2}\right)
+}.
+\]
+
+Therefore, the complex poles of \(S_{++}\) and \(S_{--}\) on the positive imaginary \(k\)-axis correspond respectively to even- and odd-parity bound states. Their zeros occur at the reflected points \(k=-i\lambda\), as required by the analytic structure of a unitary scattering matrix. The even and odd sectors differ only through their transcendental quantization conditions:
+\[
+\lambda=q\tan\!\left(\frac{qa}{2}\right)
+\quad \text{(even)},
+\qquad
+\lambda=-q\cot\!\left(\frac{qa}{2}\right)
+\quad \text{(odd)}.
+\]
+In particular, the even sector always admits the lowest bound state first, while odd bound states appear only when the well is sufficiently deep or wide.
+
+\item For the symmetric double-\(\delta\) barrier
+\[
+V(x)=V_0\bigl[\delta(x-1)+\delta(x+1)\bigr],
+\qquad V_0>0,
+\]
+define
+\[
+U_0=\frac{2mV_0}{\hbar^2},
+\qquad
+k^2=\frac{2mE}{\hbar^2}.
+\]
+Since the potential is symmetric, it is sufficient to work in the parity basis and match only at \(x=1\); the condition at \(x=-1\) is then automatically satisfied.
+
+For the even-parity channel, the exterior solution for \(x>1\) is
+\[
+\psi_+(x)=e^{-ikx}+S_{++}e^{ikx},
+\]
+while in the interior region \(|x|<1\) even parity requires
+\[
+\psi_+(x)=A\bigl(e^{ikx}+e^{-ikx}\bigr).
+\]
+The wavefunction is continuous at \(x=1\), so
+\[
+e^{-ik}+S_{++}e^{ik}=A\bigl(e^{ik}+e^{-ik}\bigr).
+\]
+
+Let's check differentiability of $\psi$. Because of pointwise nature of the \(\delta\)-function, \textbf{the derivative at boundary} is discontinuous and the Robin boundary condition \textbf{NO LONGER APPLIES} meaning \[\psi^{'}_{1^{-}} \neq \psi^{'}_{1^{+}} \implies \frac{\psi_-'}{\psi_-}\Big|_{x=1} \neq \frac{\psi_+'}{\psi_+}\Big|_{x=1}\]
+
+To solve this issue let's integrate the nondimensionalized schrodinger equation at x=1 boundary.
+\begin{equation}
+\label{eq:'delta-derivative'}
+    \dfrac{d^2 \psi}{dx^2} + \dfrac{2m V_0}{\hbar^2}(\delta(x-1) + \delta(x+1))\psi = E\psi
+\end{equation}
+
+\[\int_{1-\epsilon}^{1+\epsilon} -d(\dfrac{d \psi}{dx}) + \int_{1-\epsilon}^{1+\epsilon} U_0[\delta(x-(-1)) + \delta(x-1)]dx = \int_{1-\epsilon}^{1+\epsilon}k^2dx \]
+
+$\text{RHS} = 0$ because of infinitesimal integration eliminating which we get
+\[
+\psi_+'(1^+)-\psi_+'(1^-)=U_0\,\psi_+(1).
+\]
+Using
+\[
+\psi_+'(1^+)=-ik\,e^{-ik}+ik\,S_{++}e^{ik},
+\qquad
+\psi_+'(1^-)=ikA\bigl(e^{ik}-e^{-ik}\bigr),
+\]
+the jump condition becomes
+\[
+\bigl(-ik\,e^{-ik}+ik\,S_{++}e^{ik}\bigr)
+-
+ikA\bigl(e^{ik}-e^{-ik}\bigr)
+=
+U_0\bigl(e^{-ik}+S_{++}e^{ik}\bigr).
+\]
+Eliminating \(A\) using continuity and simplifying gives
+\[
+\boxed{
+S_{++}
+=
+e^{-2ik}\,
+\frac{(2k-iU_0)e^{ik}-iU_0e^{-ik}}
+{(2k+iU_0)e^{-ik}+iU_0e^{ik}}
+}.
+\]
+
+For the odd-parity channel, the exterior solution for \(x>1\) is
+\[
+\psi_-(x)=e^{-ikx}-S_{--}e^{ikx},
+\]
+while in the interior region \(|x|<1\) odd parity requires
+\[
+\psi_-(x)=B\bigl(e^{ikx}-e^{-ikx}\bigr).
+\]
+Continuity at \(x=1\) gives
+\[
+e^{-ik}-S_{--}e^{ik}=B\bigl(e^{ik}-e^{-ik}\bigr).
+\]
+The derivative jump condition is
+\[
+\psi_-'(1^+)-\psi_-'(1^-)=U_0\,\psi_-(1),
+\]
+with
+\[
+\psi_-'(1^+)=-ik\,e^{-ik}-ik\,S_{--}e^{ik},
+\qquad
+\psi_-'(1^-)=ikB\bigl(e^{ik}+e^{-ik}\bigr).
+\]
+Hence
+\[
+\bigl(-ik\,e^{-ik}-ik\,S_{--}e^{ik}\bigr)
+-
+ikB\bigl(e^{ik}+e^{-ik}\bigr)
+=
+U_0\bigl(e^{-ik}-S_{--}e^{ik}\bigr).
+\]
+Eliminating \(B\) and simplifying yields
+\[
+\boxed{
+S_{--}
+=
+e^{-2ik}\,
+\frac{(2k-iU_0)e^{ik}+iU_0e^{-ik}}
+{(2k+iU_0)e^{-ik}-iU_0e^{ik}}
+}.
+\]
+
+Thus, in the parity basis, the symmetric double-\(\delta\) barrier is described by the two diagonal scattering amplitudes
+\[
+\boxed{
+S_{++}
+=
+e^{-2ik}\,
+\frac{(2k-iU_0)e^{ik}-iU_0e^{-ik}}
+{(2k+iU_0)e^{-ik}+iU_0e^{ik}},
+\qquad
+S_{--}
+=
+e^{-2ik}\,
+\frac{(2k-iU_0)e^{ik}+iU_0e^{-ik}}
+{(2k+iU_0)e^{-ik}-iU_0e^{ik}}
+}.
+\]
+These are the required parity-basis S-matrix elements for the symmetric double-\(\delta\) barrier.
+
+\item[(e)]
+\begin{itemize}
+    \item[(1)] The transcendental equations are given by : \[
+\lambda_{\text{even}} = q\tan\!\left(\frac{qa}{2}\right) \qquad \lambda_{\text{odd}}=-q\cot\!\left(\frac{qa}{2}\right)
+\]
+
+An obvious question arises as to why the complex poles/ singularities yield us solutions. This is because poles occur when the denominator of the S-matrix vanishes, the scattering solution exists with zero incoming amplitude, i.e. a non-trivial homogeneous solution.  At $k=i\lambda$, this solution is exponentially decaying and normalizable, which is precisely the condition for a bound state.
+
+The second equation that we have is \[q^2+\lambda^2=U_0\]. Now we can solve for even and odd states given these two transcendental equations and the algebraic equation and equating the two. Doing a little bit of algebraic manipulation and substituting $U_0 = 1$ we get \[q \tan{qa} = \sqrt{U_0 - q^2}\] \[\tan{qa} = \sqrt{\dfrac{1}{q^2} - 1} , \qquad q^2+\lambda^2=U_0\]. Similarly for odd states we get \[\cot(qa) = -\sqrt{\dfrac{1}{q^2} - 1}, \qquad q^2+\lambda^2=U_0\]. Code below finds solutions using the same equation.
+\begin{center}
+    Code for finding Pothole potential bound states for a given fixed well width and finite depth
+\end{center}
+\lstinputlisting[
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    frame=single,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=fullflexible,
+    keepspaces=true
+]{ans1e.py}
+
+This yields us the following : 
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{a=1.png}
+    \caption{$a=1$}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{a=5.png}
+    \caption{$a=5$}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{a=100.png}
+    \caption{$a=100$}
+\end{subfigure}
+
+\caption{Even and odd state solutions for different well widths}
+\end{figure}
+
+    \item[(2)] For the symmetric double-$\delta$ barrier, the parity-basis scattering amplitudes \(S_{++}\) and \(S_{--}\) are already known. The corresponding non-complexified pole conditions are obtained by setting the denominators of these matrix elements equal to zero. This gives
+\[
+(2k+iU_0)e^{-ik}+iU_0e^{ik}=0
+\qquad \text{(even channel)}
+\]
+and
+\[
+(2k+iU_0)e^{-ik}-iU_0e^{ik}=0
+\qquad \text{(odd channel)}.
+\]
+
+To pass from the double-$\delta$ \emph{barrier} to the double-$\delta$ \emph{well}, one proceeds exactly as in the pothole potential: the pole condition is analytically continued into the bound-state regime by setting
+\[
+k=i\lambda, \qquad \lambda>0.
+\]
+Under this substitution, the poles move onto the positive imaginary \(k\)-axis and correspond to normalizable bound states.
+
+Substituting \(k=i\lambda\) into the pole equations gives the two transcendental equations for the double-$\delta$ well bound states:
+\[
+\lambda=\frac{U_0}{2}\left(1+e^{-2\lambda}\right)
+\qquad \text{(even bound states)},
+\]
+\[
+\lambda=\frac{U_0}{2}\left(1-e^{-2\lambda}\right)
+\qquad \text{(odd bound states)}.
+\]
+
+These are the equations to be solved numerically in order to obtain and plot the even and odd bound-state solutions of the symmetric double-$\delta$ well.
+
+\lstinputlisting[
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    frame=single,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=fullflexible,
+    keepspaces=true
+]{ans1e_b.py}
+\end{itemize}
+\end{enumerate}
+
+This yields us the following : 
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{alpha=0.2.png}
+    \caption{$m|V_0|/\hbar^2 = 0.2$}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{alpha=5.png}
+    \caption{$m|V_0|/\hbar^2 = 5$}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{alpha=100.png}
+    \caption{$m|V_0|/\hbar^2 = 100$}
+\end{subfigure}
+
+\caption{Even and odd state solutions for different $\delta$ magnitudes}
+\end{figure}
+
+\begin{center}\rule{\linewidth}{0.4pt}\end{center}
+
+\textbf{\large Question 2}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item For the hard-sphere potential
+\[
+V(r)=
+\begin{cases}
+\infty, & r<a,\\[4pt]
+0, & r\ge a,
+\end{cases}
+\]
+the nondimensionalized radial Schr\"odinger equation for the reduced function \(u_l(r)=rR_l(r)\) is
+\[
+\frac{d^2u_l}{dr^2}+\left[k^2-\frac{l(l+1)}{r^2}-U(r)\right]u_l=0,
+\qquad
+k^2=\frac{2mE}{\hbar^2}.
+\]
+Since the potential is infinite for \(r<a\), the wavefunction must vanish in the interior region, and hence
+\[
+R_l(r)=0,
+\qquad r<a.
+\]
+In the exterior region \(r>a\), the potential vanishes and the radial equation becomes
+\[
+\frac{d^2u_l}{dr^2}+\left[k^2-\frac{l(l+1)}{r^2}\right]u_l=0.
+\]
+
+\begin{itemize}
+    \item[(i)] The general solution is therefore a linear combination of spherical Bessel and Neumann functions,
+\[
+R_l(r)=A_l\,j_l(kr)+B_l\,n_l(kr),
+\qquad r>a.
+\]
+It is convenient to write this in the phase-shift form
+\[
+R_l(r)=C_l\Bigl[\cos\delta_l\,j_l(kr)-\sin\delta_l\,n_l(kr)\Bigr].
+\]
+Using the large-\(r\) asymptotics
+\[
+j_l(kr)\sim \frac{1}{kr}\sin\!\left(kr-\frac{l\pi}{2}\right),
+\qquad
+n_l(kr)\sim -\frac{1}{kr}\cos\!\left(kr-\frac{l\pi}{2}\right),
+\]
+the asymptotic radial wavefunction is
+\[
+R_l(r)\sim \frac{C_l}{kr}\sin\!\left(kr-\frac{l\pi}{2}+\delta_l\right),
+\qquad r\to\infty.
+\]
+Thus, for hard-sphere scattering, the exterior radial solution is a free spherical wave with phase shift \(\delta_l\), while the interior solution vanishes identically.
+
+\item[(ii)] To determine the phase shifts for the hard sphere, we impose the boundary condition at the surface \(r=a\). Since the potential is impenetrable for \(r<a\), the wavefunction must vanish at \(r=a\), that is
+\[
+R_l(a)=0.
+\]
+Using the phase-shift form of the exterior solution,
+\[
+R_l(r)=C_l\Bigl[\cos\delta_l\,j_l(kr)-\sin\delta_l\,n_l(kr)\Bigr],
+\]
+we obtain at \(r=a\)
+\[
+C_l\Bigl[\cos\delta_l\,j_l(ka)-\sin\delta_l\,n_l(ka)\Bigr]=0.
+\]
+Since \(C_l\neq 0\), this gives
+\[
+\cos\delta_l\,j_l(ka)-\sin\delta_l\,n_l(ka)=0.
+\]
+Rearranging,
+\[
+\cos\delta_l\,j_l(ka)=\sin\delta_l\,n_l(ka),
+\]
+and therefore
+\[
+\boxed{
+\tan\delta_l=\frac{j_l(ka)}{n_l(ka)}
+}.
+\]
+
+For the \(s\)-wave \((l=0)\), we use
+\[
+j_0(x)=\frac{\sin x}{x},
+\qquad
+n_0(x)=-\frac{\cos x}{x},
+\]
+so that
+\[
+\tan\delta_0=\frac{j_0(ka)}{n_0(ka)}
+=
+-\tan(ka).
+\]
+Hence one may choose
+\[
+\boxed{
+\delta_0=-ka
+}
+\]
+modulo integer multiples of \(\pi\). This is the largest phase shift at low energy, since higher partial waves are suppressed by the centrifugal barrier \(\frac{l(l+1)}{r^2}\), while the \(s\)-wave experiences no such barrier.
+\end{itemize}
+
+\item For the attractive spherical well
+\[
+V(r)=
+\begin{cases}
+-\dfrac{\hbar^2\gamma^2}{2m}, & r<a,\\[6pt]
+0, & r\ge a,
+\end{cases}
+\]
+define
+\[
+q^2=k^2+\gamma^2.
+\]
+The reduced radial equation is
+\[
+\frac{d^2u_l}{dr^2}+\left[k^2-\frac{l(l+1)}{r^2}-U(r)\right]u_l=0.
+\]
+In the interior region \(r<a\), where \(U(r)=-\gamma^2\), the equation becomes
+\[
+\frac{d^2u_l}{dr^2}+\left[q^2-\frac{l(l+1)}{r^2}\right]u_l=0.
+\]
+Regularity at the origin excludes the spherical Neumann function, and hence the interior solution is
+\[
+R_l^{\text{in}}(r)=A\,j_l(qr).
+\]
+In the exterior region \(r\ge a\), where \(U(r)=0\), the general solution is written in phase-shift form as
+\[
+R_l^{\text{out}}(r)=B\Bigl[\cos\delta_l\,j_l(kr)-\sin\delta_l\,n_l(kr)\Bigr].
+\]
+
+Continuity of the wavefunction and its derivative at \(r=a\) gives
+\[
+A\,j_l(qa)=B\Bigl[\cos\delta_l\,j_l(ka)-\sin\delta_l\,n_l(ka)\Bigr],
+\]
+\[
+A\,q\,j_l'(qa)=B\Bigl[\cos\delta_l\,k\,j_l'(ka)-\sin\delta_l\,k\,n_l'(ka)\Bigr].
+\]
+Eliminating the constants \(A\) and \(B\), we obtain
+\[
+\frac{q\,j_l'(qa)}{j_l(qa)}
+=
+\frac{k\bigl[\cos\delta_l\,j_l'(ka)-\sin\delta_l\,n_l'(ka)\bigr]}
+{\cos\delta_l\,j_l(ka)-\sin\delta_l\,n_l(ka)}.
+\]
+Cross-multiplying and collecting the \(\cos\delta_l\) and \(\sin\delta_l\) terms yields
+\[
+\cos\delta_l\Bigl[q\,j_l(ka)j_l'(qa)-k\,j_l'(ka)j_l(qa)\Bigr]
+=
+\sin\delta_l\Bigl[q\,n_l(ka)j_l'(qa)-k\,n_l'(ka)j_l(qa)\Bigr].
+\]
+Therefore,
+\[
+\boxed{
+\tan\delta_l=
+\frac{q\,j_l(ka)j_l'(qa)-k\,j_l'(ka)j_l(qa)}
+{q\,n_l(ka)j_l'(qa)-k\,n_l'(ka)j_l(qa)}
+}.
+\]
+
+To determine the low-energy behavior, we use the small-argument expansions
+\[
+j_l(x)\sim \frac{x^l}{(2l+1)!!},
+\qquad
+j_l'(x)\sim \frac{l\,x^{l-1}}{(2l+1)!!},
+\]
+\[
+n_l(x)\sim -\frac{(2l-1)!!}{x^{l+1}},
+\qquad
+n_l'(x)\sim \frac{(l+1)(2l-1)!!}{x^{l+2}}.
+\]
+As \(k\to 0\), the numerator behaves as \(k^l\), while the denominator behaves as \(k^{-(l+1)}\). Hence
+\[
+\tan\delta_l \sim k^{2l+1}.
+\]
+Since \(\delta_l\to 0\) as \(k\to 0\), we may replace \(\tan\delta_l\sim\delta_l\), and therefore
+\[
+\boxed{
+\delta_l\sim (ka)^{2l+1}
+\qquad \text{as } k\to 0.
+}
+\]
+
+\item For the repulsive spherical potential
+\[
+V(r)=
+\begin{cases}
++\dfrac{\hbar^2\gamma^2}{2m}, & r<a,\\[6pt]
+0, & r\ge a,
+\end{cases}
+\]
+we consider the zero-energy \(s\)-wave scattering problem. At zero energy, the reduced radial equation outside the interaction region \((r\ge a)\) is
+\[
+\frac{d^2u}{dr^2}=0,
+\]
+where \(u(r)=r\psi(r)\). Hence the exterior solution is linear:
+\[
+u_{\text{out}}(r)=C(r-a_s),
+\]
+where \(a_s\) is the scattering length.
+
+Inside the repulsive region \((r<a)\), the reduced radial equation is
+\[
+\frac{d^2u}{dr^2}-\gamma^2u=0.
+\]
+The regular solution at the origin is
+\[
+u_{\text{in}}(r)=A\sinh(\gamma r),
+\]
+since the \(\cosh(\gamma r)\) term would give a nonzero value at \(r=0\), incompatible with \(u(0)=0\).
+
+Continuity of \(u\) and \(u'\) at \(r=a\) gives
+\[
+A\sinh(\gamma a)=C(a-a_s),
+\]
+\[
+A\gamma\cosh(\gamma a)=C.
+\]
+Eliminating \(A\) and \(C\), we obtain
+\[
+a-a_s=\frac{\tanh(\gamma a)}{\gamma},
+\]
+and hence
+\[
+\boxed{
+a_s=a-\frac{\tanh(\gamma a)}{\gamma}
+}.
+\]
+Since \(\tanh(\gamma a)<\gamma a\) for all \(\gamma a>0\), it follows immediately that $a_s$ remains finite and positive because $\tanh(|\gamma|a)$ is always bounded between 0 and 1, so
+\[0<\frac{\tanh(|\gamma|a)}{|\gamma|a}<1\]
+for $|\gamma|a>0$, which implies
+\[0<\frac{a_s}{a}<1\].
+
+\item For the attractive spherical well
+\[
+V(r)=
+\begin{cases}
+-\dfrac{\hbar^2\gamma^2}{2m}, & r<a,\\[6pt]
+0, & r\ge a,
+\end{cases}
+\]
+the \(s\)-wave scattering length obtained from the zero-energy matching problem is
+\[
+a_s=a-\frac{\tan(\gamma a)}{\gamma}.
+\]
+It is convenient to write this in dimensionless form as
+\[
+\frac{a_s}{a}=1-\frac{\tan(\gamma a)}{\gamma a}.
+\]
+
+To determine the behavior for sufficiently small \(a\), set
+\[
+x=\gamma a,
+\qquad x\ll 1.
+\]
+Using the small-argument expansion
+\[
+\tan x = x+\frac{x^3}{3}+O(x^5),
+\]
+we obtain
+\[
+\frac{\tan(\gamma a)}{\gamma}
+=
+a+\frac{\gamma^2a^3}{3}+O(a^5).
+\]
+Hence
+\[
+a_s
+=
+a-\left(a+\frac{\gamma^2a^3}{3}+O(a^5)\right)
+=
+-\frac{\gamma^2a^3}{3}+O(a^5).
+\]
+Therefore, for sufficiently small \(a\),
+\[
+\boxed{
+a_s<0.
+}
+\]
+
+This result has a clear physical meaning: for a weak or narrow attractive well, the potential is not yet strong enough to support a normalizable bound state, and the low-energy scattering length remains negative.
+
+The scattering length becomes divergent when its denominator structure forces
+\[
+\tan(\gamma a)\to \infty.
+\]
+This occurs when
+\[
+\gamma a = \left(n+\frac12\right)\pi,
+\qquad n=0,1,2,\dots
+\]
+and therefore
+\[
+\boxed{
+\gamma = \frac{(n+\tfrac12)\pi}{a}.
+}
+\]
+At these values,
+\[
+\boxed{
+a_s \to \pm \infty.
+}
+\]
+
+The divergence signals the appearance of a new \(s\)-wave bound state exactly at threshold. To see the associated quantization condition, recall that the \(s\)-wave bound states satisfy
+\[
+\tan\!\left(\sqrt{\gamma^2-\lambda^2}\,a\right)
+=
+-\frac{\sqrt{\gamma^2-\lambda^2}}{\lambda},
+\]
+where
+\[
+E=-\frac{\hbar^2\lambda^2}{2m},
+\qquad \lambda>0.
+\]
+A new bound state first appears when it reaches threshold, namely
+\[
+\lambda=0.
+\]
+Substituting this into the bound-state condition gives
+\[
+\tan(\gamma a)\to \infty,
+\]
+hence the threshold quantization condition is precisely
+\[
+\boxed{
+\gamma a = \left(n+\frac12\right)\pi.
+}
+\]
+
+Thus, for small \(a\) the scattering length is negative, while its divergences occur exactly when the attractive well becomes strong enough to admit a new \(s\)-wave bound state at zero energy. Just below such a critical value, \(a_s\) is large and negative; just above it, \(a_s\) is large and positive.
+
+\item 
+
+\begin{itemize}
+    \item[(i)] We already have the formula of $\tan{\delta_l}$ from above. We use the \texttt{scipy.special} package to import bessel and von neumann functions for ease. The solutions for the different l channels is plotted below.
+
+\lstinputlisting[
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    frame=single,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=fullflexible,
+    keepspaces=true
+]{ans2e_i.py}
+
+which yields us:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{phase_shift.png}
+    \caption{Phase shifts as a function of $ka$}
+    \label{fig:phase_shift_hard}
+\end{figure}
+
+\begin{itemize}
+    \item[\bullet] At low energy $(ka \ll 1)$, the $s$-wave $(\ell=0)$ phase shift is the largest, while higher partial waves are strongly suppressed.
+    \item[\bullet] The $s$-wave dominates for small ka because it experiences no centrifugal barrier, whereas the $\ell>0$ channels are inhibited by the effective barrier term $\dfrac{l(l+1)}{r^2}$.
+    \item[\bullet] As ka increases, the incident particle has enough energy to probe shorter angular scales, and the higher-$\ell$ channels begin to contribute significantly, so the scattering can no longer be described by the $s$-wave alone.
+\end{itemize}
+
+    \item[(ii)] For the attractive spherical well, the $s$-wave scattering length is given by
+\[
+\frac{a_s}{a}=1-\frac{\tan(\gamma a)}{\gamma a}.
+\]
+The objective is to visualize how the scattering length behaves as a function of the dimensionless parameter $\gamma a$, which controls the depth of the well.
+
+To this end, the above expression is evaluated numerically over the range $0<\gamma a<3\pi$ and plotted using \texttt{matplotlib}. The plot highlights the zeros and divergences of $a_s/a$, which arise due to the poles of the tangent function.
+
+In particular, divergences occur at
+\[
+\gamma a = \left(n+\tfrac{1}{2}\right)\pi,
+\]
+where $\tan(\gamma a)$ diverges. These divergences correspond to the appearance of new bound states, as at these points the system supports a state with energy approaching zero from below. Thus, the scattering length serves as a diagnostic for the emergence of bound states.
+\lstinputlisting[
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    frame=single,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=fullflexible,
+    keepspaces=true
+]{ans2e_ii.py}
+
+which yields us:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{attractive_spherical.png}
+    \caption{Scattering length variation of the attractive potential well.}
+    \label{fig:attractive_spherical_well}
+\end{figure}
+
+\begin{itemize}
+    \item[\bullet] $a_s/a$ diverges at: \[\gamma a = \frac{\pi}{2}, \frac{3\pi}{2}, \frac{5\pi}{2}, \dots\]
+    \item[\bullet] Between these points, it flips sign $+\infty \to -\infty$. 
+    \item[\circ] Divergences in $a_s$ occur when $\tan(\gamma a)$ diverges, i.e. \[\gamma a = (n+\tfrac{1}{2})\pi\].
+    \item[\bullet] At these points, a new bound state appears with energy approaching zero from below.
+    \item[\bullet] The sign change in $a_s$ across each divergence reflects the transition between having $n$ and $n+1$ bound states.
+\end{itemize}
+
+    \item[(iii)]
+    For the repulsive spherical well, the $s$-wave scattering length is given by
+\[
+\frac{a_s}{a}=1-\frac{\tanh(|\gamma|a)}{|\gamma|a}.
+\]
+The objective is to study the behavior of the scattering length as a function of the dimensionless parameter $|\gamma|a$, which measures the strength of the repulsive interaction.
+
+The above expression is evaluated numerically over the range $|\gamma|a\in(0,10)$ and plotted using \texttt{matplotlib}. Unlike the attractive case, the hyperbolic tangent function is bounded, and hence the scattering length remains finite for all values of $|\gamma|a$.
+
+Since $0<\tanh(|\gamma|a)<1$ for $|\gamma|a>0$, it follows that
+\[
+0<\frac{a_s}{a}<1,
+\]
+so the scattering length is always positive and finite.
+
+In the strong-repulsion limit $|\gamma|a\to\infty$, one has $\tanh(|\gamma|a)\to 1$, and therefore
+\[
+\frac{a_s}{a}\to 1.
+\]
+This shows that the repulsive spherical well approaches the hard-sphere limit, where the scattering length equals the physical radius of the sphere.
+    \lstinputlisting[
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    frame=single,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=fullflexible,
+    keepspaces=true
+]{ans2e_iii.py}
+
+which yields us:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{repulsive_spherical.png}
+    \caption{Scattering length variation of the repulsive potential well.}
+    \label{fig:repulsive_spherical_well}
+\end{figure}
+
+
+As the repulsion becomes strong, $|\gamma|a\to\infty$, one has \[\tanh(|\gamma|a)\to 1\], so
+\[\frac{a_s}{a}=1-\frac{\tanh(|\gamma|a)}{|\gamma|a}\to 1\]. Thus the scattering length approaches the hard-sphere value $a_s=a$, meaning a sufficiently strong repulsive well behaves like an impenetrable sphere.    
+\end{itemize}
+\end{enumerate}
+\end{document}
